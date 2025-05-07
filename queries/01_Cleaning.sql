@@ -1,6 +1,4 @@
--- 01_cleaning.sql
 
--- Remove rows where CustomerID is null (this helps clean the data)
-SELECT *
-FROM sales_data
-WHERE CustomerID IS NOT NULL;   
+-- Step 2: Results from Cleaned View (removed duplicates)
+SELECT * FROM 
+    cleanedsales;
