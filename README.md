@@ -21,4 +21,6 @@ This project analyzes customer behavior and sales data for an online retail comp
 - Identified monthly sales revenue.
 - Sales have been increasing steadily over the past 6 months.
 
-Next step: Investigate customer segmentation.
+---
+
+##Next step: Investigate customer segmentation.
