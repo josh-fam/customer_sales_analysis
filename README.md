@@ -28,125 +28,16 @@ SELECT
     InvoiceDate,
     CustomerID,
     Country
-FROM OnlineRetail
+FROM sales_data
 WHERE
     CustomerID IS NOT NULL
     AND Quantity > 0
     AND UnitPrice > 0;
 
-2️⃣ Step 2: Top 10 Best-Selling Products
+Using the `CleanedSales` view, I performed key sales analyses including:
 
-    What was done:
-
-        Aggregated total quantity sold per product
-
-        Sorted to find the top 10 products by volume
-
-SELECT
-    Description,
-    SUM(Quantity) AS TotalSold
-FROM CleanedSales
-GROUP BY Description
-ORDER BY TotalSold DESC
-LIMIT 10;
-
-    Insight: These are your highest-moving products; great candidates for promotions or bundling.
-
-3️⃣ Step 3: Top 5 Countries by Revenue
-
-    What was done:
-
-        Summed total revenue (TotalPrice) by country
-
-SELECT
-    Country,
-    SUM(TotalPrice) AS Revenue
-FROM CleanedSales
-GROUP BY Country
-ORDER BY Revenue DESC
-LIMIT 5;
-
-    Insight: Shows your most profitable international markets.
-
-4️⃣ Step 4: Monthly Revenue Trend (02_sales_trends.sql)
-
-    What was done:
-
-        Grouped transactions by month
-
-        Calculated monthly revenue
-
-SELECT
-    DATE_TRUNC('month', InvoiceDate) AS Month,
-    SUM(TotalPrice) AS MonthlyRevenue
-FROM CleanedSales
-GROUP BY Month
-ORDER BY Month;
-
-    Replace DATE_TRUNC with:
-
-        STRFTIME('%Y-%m', InvoiceDate) for SQLite
-
-        DATE_FORMAT(InvoiceDate, '%Y-%m') for MySQL
-
-    Insight: Helps identify seasonality and performance over time.
-
-5️⃣ Step 5: Customer Lifetime Value (LTV)
-
-    What was done:
-
-        Aggregated each customer’s total purchases
-
-SELECT
-    CustomerID,
-    SUM(TotalPrice) AS LifetimeValue
-FROM CleanedSales
-GROUP BY CustomerID
-ORDER BY LifetimeValue DESC
-LIMIT 10;
-
-    Insight: Top 10 customers generate a significant portion of revenue — ideal for loyalty or VIP programs.
-
-6️⃣ Step 6: Average Order Value (AOV)
-
-    What was done:
-
-        Summed revenue per order (invoice)
-
-        Calculated average order value
-
-WITH OrderTotals AS (
-    SELECT
-        InvoiceNo,
-        SUM(TotalPrice) AS OrderValue
-    FROM CleanedSales
-    GROUP BY InvoiceNo
-)
-SELECT
-    AVG(OrderValue) AS AverageOrderValue
-FROM OrderTotals;
-
-    Insight: AOV helps benchmark marketing efficiency and upselling strategies.
-
-🛠️ Tools Used
-
-    SQL (PostgreSQL / SQLite / MySQL)
-
-    Visual Studio Code
-
-    Git & GitHub
-
-📁 Folder Structure
-
-customer_sales_analysis/
-│
-├── data/              # Raw dataset (CSV or SQL dump)
-│   └── online_retail.csv
-│
-├── queries/           # SQL queries
-│   └── 01_cleaning.sql
-│   └── 02_sales_trends.sql
-│
-├── results/           # Optional exports or charts
-├── README.md          # Project documentation
-└── .gitignoregit
+- 📈 Monthly Sales Trend  
+- 🏆 Top 10 Best-Selling Products  
+- 🌍 Top 5 Countries by Revenue  
+- 💰 Customer Lifetime Value  
+- 🧾 Average Order Value
