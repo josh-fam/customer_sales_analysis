@@ -17,3 +17,6 @@ This project analyzes customer behavior and sales data for an online retail comp
 ## Next Steps
 - Analyze sales trends by country and month.
 - Perform RFM segmentation for customer behavior.
+2. **Sales Trends (02_sales_trends.sql)**:
+    - Found the total sales made monthly from '2010-12-01  -  2011-12-01'
+    - Result: Clean and readable dataset for the targeted months
